@@ -2,7 +2,7 @@
   "name": "Cowtion - Road Safety Alert System",
   "short_name": "Cowtion!",
   "description": "Real-time cattle detection with AI-powered analysis for road safety in India",
-  "start_url": "/home",
+  "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
@@ -11,13 +11,13 @@
   "categories": ["productivity", "utilities"],
   "icons": [
     {
-      "src": "/cowtion.png",
+      "src": "/cowtion-log-x.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/cowtion-log-x.png",
+      "src": "/cowtion.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
