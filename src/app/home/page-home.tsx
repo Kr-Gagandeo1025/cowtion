@@ -126,7 +126,7 @@ export default function HomePage() {
         <button
           onClick={() => setIsUploadOpen(true)}
           disabled={!userLocation}
-          className="absolute bottom-8 right-8 w-16 h-16 bg-red-600 hover:bg-red-700 text-white rounded-full shadow-lg flex items-center justify-center text-3xl transition disabled:opacity-50 z-50"
+          className="absolute bottom-16 right-8 w-16 h-16 bg-red-600 hover:bg-red-700 text-white rounded-full shadow-lg flex items-center justify-center text-3xl transition disabled:opacity-50 z-50"
           title="Report cattle"
         >
           +
