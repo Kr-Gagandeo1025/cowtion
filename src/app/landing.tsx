@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 export default function LandingPage() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -13,6 +14,10 @@ export default function LandingPage() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -26,7 +31,9 @@ export default function LandingPage() {
           <div className="flex items-center gap-2 text-2xl font-bold text-red-600">
             <span>🐮Cowtion!</span>
           </div>
-          <div className="flex gap-6 items-center">
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex gap-6 items-center">
             <Link href="/about" className="text-gray-600 hover:text-red-600 font-semibold transition">
               About
             </Link>
@@ -43,7 +50,53 @@ export default function LandingPage() {
               Get Started
             </Link>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden flex flex-col gap-1.5 focus:outline-none"
+          >
+            <div className={`w-6 h-0.5 bg-gray-600 transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></div>
+            <div className={`w-6 h-0.5 bg-gray-600 transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`}></div>
+            <div className={`w-6 h-0.5 bg-gray-600 transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></div>
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className={`md:hidden bg-white border-t border-gray-200 shadow-lg transition-all duration-300 ${isScrolled ? 'shadow-lg' : 'shadow-md'}`}>
+            <div className="px-4 py-4 space-y-3">
+              <Link
+                href="/about"
+                onClick={closeMobileMenu}
+                className="block px-4 py-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg font-semibold transition"
+              >
+                About
+              </Link>
+              <Link
+                href="/contact"
+                onClick={closeMobileMenu}
+                className="block px-4 py-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg font-semibold transition"
+              >
+                Contact
+              </Link>
+              <Link
+                href="/terms-privacy"
+                onClick={closeMobileMenu}
+                className="block px-4 py-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg font-semibold transition"
+              >
+                Terms & Privacy
+              </Link>
+              <Link
+                href="/home"
+                onClick={closeMobileMenu}
+                className="block px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 font-semibold transition text-center"
+              >
+                Get Started
+              </Link>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}

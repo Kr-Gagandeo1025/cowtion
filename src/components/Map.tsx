@@ -29,14 +29,17 @@ interface MapProps {
   userLocation: { latitude: number; longitude: number } | null;
   cattleReports: CattleReport[];
   onMarkerClick: (report: CattleReport) => void;
+  onLocationUpdate?: (location: { latitude: number; longitude: number }) => void;
 }
 
 export const Map: React.FC<MapProps> = ({
   userLocation,
   cattleReports,
   onMarkerClick,
+  onLocationUpdate,
 }) => {
   const mapInitialized = useRef(false);
+  const mapRef = useRef<any>(null);
 
   useEffect(() => {
     // Fix leaflet icon issue (only once)
@@ -60,6 +63,88 @@ export const Map: React.FC<MapProps> = ({
       });
     }
   }, []);
+
+  // Add locate control to map after it's rendered
+  useEffect(() => {
+    if (mapRef.current && typeof window !== 'undefined') {
+      import('leaflet').then((L) => {
+        // Create locate control
+        const LocateControl = L.Control.extend({
+          options: {
+            position: 'topleft',
+          },
+          onAdd: function (map: any) {
+            const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+            const button = L.DomUtil.create('button', '', container) as HTMLButtonElement;
+            
+            button.innerHTML = '📍';
+            button.title = 'Go to my location';
+            button.style.cssText = `
+              width: 36px;
+              height: 36px;
+              background-color: white;
+              border: 2px solid #ccc;
+              border-radius: 4px;
+              cursor: pointer;
+              font-size: 18px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              transition: all 0.3s ease;
+              box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+              font-family: Arial, sans-serif;
+            `;
+
+            button.onmouseover = () => {
+              button.style.backgroundColor = '#f0f0f0';
+              button.style.borderColor = '#999';
+            };
+            button.onmouseout = () => {
+              button.style.backgroundColor = 'white';
+              button.style.borderColor = '#ccc';
+            };
+
+            button.onclick = (e: Event) => {
+              e.preventDefault();
+              e.stopPropagation();
+              handleLocate();
+            };
+
+            L.DomEvent.disableClickPropagation(button);
+            return container;
+          },
+        });
+
+        // Add control to map
+        mapRef.current.addControl(new (LocateControl as any)());
+      });
+    }
+  }, [mapRef.current]);
+
+  const handleLocate = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          if (mapRef.current) {
+            // Animate to new location
+            mapRef.current.flyTo([latitude, longitude], 13, {
+              duration: 1,
+            });
+          }
+          if (onLocationUpdate) {
+            onLocationUpdate({ latitude, longitude });
+          }
+        },
+        (error) => {
+          console.error('Error getting location:', error);
+          alert('Unable to get your location. Please check location permissions in your browser settings.');
+        }
+      );
+    } else {
+      alert('Geolocation is not supported by your browser.');
+    }
+  };
 
   if (!userLocation) {
     return (
@@ -89,6 +174,7 @@ export const Map: React.FC<MapProps> = ({
 
   return (
     <MapContainer
+      ref={mapRef}
       center={[userLocation.latitude, userLocation.longitude]}
       zoom={13}
       style={{ width: '100%', height: '100%' }}
@@ -112,7 +198,7 @@ export const Map: React.FC<MapProps> = ({
       </CircleMarker>
 
       {/* Cattle Reports */}
-      {cattleReports.map((report) => {
+      {cattleReports.length>0&&cattleReports.map((report) => {
         const intensity = calculateIntensity(report.latitude, report.longitude);
         const color = getIntensity(intensity);
         const radius = 10 + intensity * 15;

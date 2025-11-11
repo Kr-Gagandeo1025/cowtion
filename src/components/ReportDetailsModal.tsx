@@ -31,13 +31,13 @@ export const ReportDetailsModal: React.FC<ReportDetailsModalProps> = ({
       if (voteType === 'up') {
         await upvoteCattleReport(report.id);
         // Update local upvote count
-        const newCount = upvoteCount + 1;
+        const newCount = report?.upvotes + 1;
         setUpvoteCount(newCount);
 
       } else {
         await downvoteCattleReport(report.id);
         // Update local downvote count
-        const newCount = downvoteCount + 1;
+        const newCount = report?.downvotes + 1;
         setDownvoteCount(newCount);
         
         // If downvotes reached 100+, show alert and close modal
@@ -149,7 +149,7 @@ export const ReportDetailsModal: React.FC<ReportDetailsModalProps> = ({
               >
                 <path d="M2 10.5a1.5 1.5 0 113 0v-6a1.5 1.5 0 01-3 0v6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.519-7.594A2 2 0 0015.378 8H4.721a2 2 0 00-1.994 2.263l.007.086a2 2 0 001.994 1.984h9.303a1 1 0 00.992-1.16l-.213-1.28a4 4 0 00-3.939-3.464H9.172a2 2 0 00-1.441.563L6.05 9.5H6z" />
               </svg>
-              Helpful ({upvoteCount})
+              Helpful ({upvoteCount===0? report?.upvotes : upvoteCount})
             </button>
             <button
               onClick={() => handleVote('down')}
@@ -167,7 +167,7 @@ export const ReportDetailsModal: React.FC<ReportDetailsModalProps> = ({
               >
                 <path d="M18 9.5a1.5 1.5 0 11-3 0v6a1.5 1.5 0 013 0v-6zM14 9.667v-5.43a2 2 0 00-1.106-1.79l-.05-.025A4 4 0 0011.057 2H5.641a2 2 0 00-1.962 1.608l-1.519 7.594A2 2 0 004.622 12h10.657a2 2 0 001.992-2.263l-.006-.086a2 2 0 00-1.994-1.984H5.339a1 1 0 00-.992 1.16l.213 1.28a4 4 0 003.939 3.464h.3a2 2 0 001.441-.563l1.555-1.587h1.158z" />
               </svg>
-              Not Helpful ({downvoteCount})
+              Not Helpful ({downvoteCount===0? report?.downvotes : downvoteCount})
             </button>
           </div>
         </div>
