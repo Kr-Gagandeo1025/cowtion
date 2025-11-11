@@ -105,12 +105,12 @@ export default function HomePage() {
   return (
     <div className="w-screen h-screen flex flex-col bg-white">
       {/* Header */}
-      <div className="bg-white relative text-black p-4 shadow-lg flex items-center justify-between z-10 overflow-y-hidden">
+      <div className="bg-white relative text-black p-4 shadow-lg flex items-center justify-between z-10 overflow-hidden">
         <div className="flex items-center gap-2">
             <img src="/cowtion.png" alt='cowtion-log' height={30} width={30} className='w-[40px] h-auto'/>
           <h1 className="text-2xl font-bold">Cowtion!</h1>
         </div>
-        <Image src="/cowPrint.png" alt='cow-print' height={20} width={20} className='w-10 h-auto absolute right-50'/>
+        {/* <Image src="/cowPrint.png" alt='cow-print' height={20} width={20} className='w-10 h-auto absolute right-45'/> */}
         <Image src="/cowPrint.png" alt='cow-print' height={20} width={20} className='w-10 h-auto absolute right-40 -bottom-6'/>
         <Image src="/cowPrint.png" alt='cow-print' height={20} width={20} className='w-10 h-auto absolute right-35 bottom-10'/>
         <Image src="/cowPrint.png" alt='cow-print' height={20} width={20} className='w-10 h-auto absolute right-20 -bottom-2.5'/>
