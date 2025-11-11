@@ -11,20 +11,20 @@ export default function ContactPage() {
       {/* Navigation */}
       <nav className="bg-white shadow-md sticky top-0 z-40">
         <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="flex items-center gap-2 font-bold text-xl text-red-600">
-            🐄 Cowtion
+          <Link href="/" className="flex items-center gap-2 font-bold text-xl" style={{ color: '#ff5055' }}>
+            � Cowtion!
           </Link>
           <div className="flex gap-4">
-            <Link href="/" className="hover:text-red-600 transition">
+            <Link href="/" className="hover:opacity-80 transition" style={{ color: '#ff5055' }}>
               Home
             </Link>
-            <Link href="/about" className="hover:text-red-600 transition">
+            <Link href="/about" className="hover:opacity-80 transition" style={{ color: '#ff5055' }}>
               About
             </Link>
-            <Link href="/contact" className="text-red-600 font-semibold">
+            <Link href="/contact" className="font-semibold" style={{ color: '#ff5055' }}>
               Contact
             </Link>
-            <Link href="/terms-privacy" className="hover:text-red-600 transition">
+            <Link href="/terms-privacy" className="hover:opacity-80 transition" style={{ color: '#ff5055' }}>
               Terms & Privacy
             </Link>
           </div>
@@ -57,10 +57,11 @@ export default function ContactPage() {
                   <p className="text-gray-600">For general inquiries and support</p>
                 </div>
               </div>
-              <p className="text-2xl font-bold text-red-600 mb-4">cowtionhelp@gmail.com</p>
+              <p className="text-2xl font-bold mb-4" style={{ color: '#ff5055' }}>cowtionhelp@gmail.com</p>
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="px-6 py-2 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition"
+                className="px-6 py-2 text-white font-bold rounded-lg hover:opacity-90 transition"
+                style={{ backgroundColor: '#ff5055' }}
               >
                 View Details
               </button>
@@ -102,27 +103,27 @@ export default function ContactPage() {
               <h3 className="text-xl font-bold text-gray-900 mb-4">We're here to help with:</h3>
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
-                  <span className="text-red-600 font-bold">•</span>
+                  <span className="font-bold" style={{ color: '#ff5055' }}>•</span>
                   <span className="text-gray-700">Bug reports and technical issues</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-red-600 font-bold">•</span>
+                  <span className="font-bold" style={{ color: '#ff5055' }}>•</span>
                   <span className="text-gray-700">Feature requests and suggestions</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-red-600 font-bold">•</span>
+                  <span className="font-bold" style={{ color: '#ff5055' }}>•</span>
                   <span className="text-gray-700">Account and registration help</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-red-600 font-bold">•</span>
+                  <span className="font-bold" style={{ color: '#ff5055' }}>•</span>
                   <span className="text-gray-700">Media inquiries and partnerships</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-red-600 font-bold">•</span>
+                  <span className="font-bold" style={{ color: '#ff5055' }}>•</span>
                   <span className="text-gray-700">General questions about Cowtion</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-red-600 font-bold">•</span>
+                  <span className="font-bold" style={{ color: '#ff5055' }}>•</span>
                   <span className="text-gray-700">Safety and road hazard reporting</span>
                 </li>
               </ul>
@@ -132,14 +133,14 @@ export default function ContactPage() {
             <div className="bg-white rounded-lg shadow-lg p-8">
               <h3 className="text-xl font-bold text-gray-900 mb-4">Quick Links</h3>
               <div className="space-y-2">
-                <Link href="/about" className="flex items-center gap-2 text-red-600 hover:text-red-700 font-semibold">
+                <Link href="/about" className="flex items-center gap-2 hover:opacity-80 font-semibold" style={{ color: '#ff5055' }}>
                   → Learn More About Cowtion
                 </Link>
-                <Link href="/terms-privacy" className="flex items-center gap-2 text-red-600 hover:text-red-700 font-semibold">
+                <Link href="/terms-privacy" className="flex items-center gap-2 hover:opacity-80 font-semibold" style={{ color: '#ff5055' }}>
                   → Terms & Privacy Policy
                 </Link>
-                <Link href="/home" className="flex items-center gap-2 text-red-600 hover:text-red-700 font-semibold">
-                  → View Live Map
+                <Link href="/home" className="flex items-center gap-2 hover:opacity-80 font-semibold" style={{ color: '#ff5055' }}>
+                  → Go To Map
                 </Link>
               </div>
             </div>
@@ -166,18 +167,20 @@ export default function ContactPage() {
                 <span className="text-2xl">📧</span>
                 <h3 className="text-lg font-bold text-gray-900">Email</h3>
               </div>
-              <div className="bg-red-50 rounded-lg p-4 border-2 border-red-200 mb-3">
+              <div className="rounded-lg p-4 mb-3" style={{ backgroundColor: '#ffe4e6', borderColor: '#ffb3ba', borderWidth: '2px' }}>
                 <p className="text-sm text-gray-600 mb-2">Send us an email:</p>
                 <a
                   href="mailto:cowtionhelp@gmail.com"
-                  className="text-xl font-bold text-red-600 hover:text-red-700 break-all"
+                  className="text-xl font-bold break-all hover:opacity-80"
+                  style={{ color: '#ff5055' }}
                 >
                   cowtionhelp@gmail.com
                 </a>
               </div>
               <button
                 onClick={() => window.location.href = 'mailto:cowtionhelp@gmail.com'}
-                className="w-full px-4 py-2 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition"
+                className="w-full px-4 py-2 text-white font-bold rounded-lg hover:opacity-90 transition"
+                style={{ backgroundColor: '#ff5055' }}
               >
                 Send Email
               </button>

@@ -6,20 +6,20 @@ export default function TermsPrivacyPage() {
       {/* Navigation */}
       <nav className="bg-white shadow-md sticky top-0 z-40">
         <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="flex items-center gap-2 font-bold text-xl text-red-600">
-            🐄 Cowtion
+          <Link href="/" className="flex items-center gap-2 font-bold text-xl" style={{ color: '#ff5055' }}>
+            � Cowtion!
           </Link>
           <div className="flex gap-4">
-            <Link href="/" className="hover:text-red-600 transition">
+            <Link href="/" className="hover:opacity-80 transition" style={{ color: '#ff5055' }}>
               Home
             </Link>
-            <Link href="/about" className="hover:text-red-600 transition">
+            <Link href="/about" className="hover:opacity-80 transition" style={{ color: '#ff5055' }}>
               About
             </Link>
-            <Link href="/contact" className="hover:text-red-600 transition">
+            <Link href="/contact" className="hover:opacity-80 transition" style={{ color: '#ff5055' }}>
               Contact
             </Link>
-            <Link href="/terms-privacy" className="text-red-600 font-semibold">
+            <Link href="/terms-privacy" className="font-semibold" style={{ color: '#ff5055' }}>
               Terms & Privacy
             </Link>
           </div>
@@ -42,11 +42,11 @@ export default function TermsPrivacyPage() {
         <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Table of Contents</h2>
           <ul className="space-y-2">
-            <li><a href="#terms" className="text-red-600 hover:text-red-700 font-semibold">→ Terms of Service</a></li>
-            <li><a href="#privacy" className="text-red-600 hover:text-red-700 font-semibold">→ Privacy Policy</a></li>
-            <li><a href="#data-usage" className="text-red-600 hover:text-red-700 font-semibold">→ Data Usage & Protection</a></li>
-            <li><a href="#community" className="text-red-600 hover:text-red-700 font-semibold">→ Community Guidelines</a></li>
-            <li><a href="#liability" className="text-red-600 hover:text-red-700 font-semibold">→ Liability Disclaimer</a></li>
+            <li><a href="#terms" className="hover:opacity-80 font-semibold" style={{ color: '#ff5055' }}>→ Terms of Service</a></li>
+            <li><a href="#privacy" className="hover:opacity-80 font-semibold" style={{ color: '#ff5055' }}>→ Privacy Policy</a></li>
+            <li><a href="#data-usage" className="hover:opacity-80 font-semibold" style={{ color: '#ff5055' }}>→ Data Usage & Protection</a></li>
+            <li><a href="#community" className="hover:opacity-80 font-semibold" style={{ color: '#ff5055' }}>→ Community Guidelines</a></li>
+            <li><a href="#liability" className="hover:opacity-80 font-semibold" style={{ color: '#ff5055' }}>→ Liability Disclaimer</a></li>
           </ul>
         </div>
 
@@ -281,7 +281,7 @@ export default function TermsPrivacyPage() {
 
           <div className="space-y-6">
             <div className="bg-red-50 border-2 border-red-300 rounded-lg p-6">
-              <h3 className="text-xl font-bold text-red-600 mb-3">⚠️ Important</h3>
+              <h3 className="text-xl font-bold mb-3" style={{ color: '#ff5055' }}>⚠️ Important</h3>
               <p className="text-gray-700 leading-relaxed">
                 Cowtion provides road safety alerts for informational purposes only. 
                 We are NOT liable for accidents, injuries, or damages resulting from the use or misuse of alerts.
@@ -318,20 +318,20 @@ export default function TermsPrivacyPage() {
               <h3 className="text-xl font-bold text-gray-900 mb-3">Contact for Issues</h3>
               <p className="text-gray-700 leading-relaxed">
                 If you experience issues or believe an alert is false, please contact us immediately at 
-                <a href="mailto:cowtionhelp@gmail.com" className="text-red-600 font-bold hover:text-red-700"> cowtionhelp@gmail.com</a>.
+                <a href="mailto:cowtionhelp@gmail.com" className="font-bold hover:opacity-80" style={{ color: '#ff5055' }}> cowtionhelp@gmail.com</a>.
               </p>
             </div>
           </div>
         </section>
 
         {/* Contact Section */}
-        <section className="bg-linear-to-r from-red-600 to-orange-600 rounded-lg shadow-lg p-12 text-white text-center mb-8">
+        <section className="rounded-lg shadow-lg p-12 text-white text-center mb-8" style={{ background: 'linear-gradient(to right, #ff5055, #ff9900)' }}>
           <h2 className="text-3xl font-bold mb-4">Questions About Our Policies?</h2>
           <p className="text-lg mb-6">
             Contact us at <a href="mailto:cowtionhelp@gmail.com" className="underline font-bold">cowtionhelp@gmail.com</a>
           </p>
-          <Link href="/contact" className="inline-block px-8 py-3 bg-white text-red-600 font-bold rounded-lg hover:bg-gray-100 transition">
-            Get in Touch
+                    <Link href="/contact" className="inline-block px-8 py-3 bg-white font-bold rounded-lg hover:opacity-90 transition" style={{ color: '#ff5055' }}>
+            Contact Us
           </Link>
         </section>
 

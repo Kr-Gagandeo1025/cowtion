@@ -20,6 +20,11 @@ const CircleMarker = dynamic(
   { ssr: false }
 );
 
+const Marker = dynamic(
+  () => import('react-leaflet').then((mod) => mod.Marker),
+  { ssr: false }
+);
+
 const Popup = dynamic(
   () => import('react-leaflet').then((mod) => mod.Popup),
   { ssr: false }
@@ -45,20 +50,6 @@ export const Map: React.FC<MapProps> = ({
     // Fix leaflet icon issue (only once)
     if (!mapInitialized.current && typeof window !== 'undefined') {
       import('leaflet').then((L) => {
-        const iconUrl = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png';
-        const shadowUrl = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png';
-        const iconRetinaUrl = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png';
-        
-        const DefaultIcon = L.icon({
-          iconUrl,
-          iconRetinaUrl,
-          shadowUrl,
-          iconSize: [25, 41],
-          iconAnchor: [12, 41],
-          popupAnchor: [1, -34],
-          shadowSize: [41, 41],
-        });
-        L.Marker.prototype.setIcon(DefaultIcon);
         mapInitialized.current = true;
       });
     }
@@ -167,9 +158,63 @@ export const Map: React.FC<MapProps> = ({
   };
 
   const getIntensity = (intensity: number) => {
-    if (intensity > 0.66) return '#dc2626';
-    if (intensity > 0.33) return '#f97316';
+    if (intensity > 10) return '#dc2626';
+    if (intensity > 5) return '#f97316';
     return '#fbbf24';
+  };
+
+  // Create location arrow icon
+  const createLocationIcon = () => {
+    if (typeof window === 'undefined') return null;
+    const L = require('leaflet');
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3b82f6" width="32" height="32">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c0 1.93-1.57 3.5-3.5 3.5S8.5 12.93 8.5 11 10.07 7.5 12 7.5s3.5 1.57 3.5 3.5z"/>
+      </svg>
+    `;
+    return L.icon({
+      iconUrl: `data:image/svg+xml;base64,${btoa(svg)}`,
+      iconSize: [32, 32],
+      iconAnchor: [16, 16],
+      popupAnchor: [0, -16],
+    });
+  };
+
+  // Create cow icon with color coding
+  const createCowIcon = (color: string) => {
+    if (typeof window === 'undefined') return null;
+    const L = require('leaflet');
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40">
+        <defs>
+          <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" floodOpacity="0.3"/>
+          </filter>
+        </defs>
+        <!-- Body -->
+        <ellipse cx="50" cy="60" rx="35" ry="25" fill="${color}" filter="url(#shadow)"/>
+        <!-- Head -->
+        <circle cx="50" cy="30" r="18" fill="${color}"/>
+        <!-- Ears -->
+        <ellipse cx="35" cy="15" rx="6" ry="10" fill="${color}"/>
+        <ellipse cx="65" cy="15" rx="6" ry="10" fill="${color}"/>
+        <!-- Eyes -->
+        <circle cx="45" cy="28" r="2" fill="black"/>
+        <circle cx="55" cy="28" r="2" fill="black"/>
+        <!-- Snout -->
+        <ellipse cx="50" cy="35" rx="4" ry="3" fill="rgba(0,0,0,0.2)"/>
+        <!-- Legs -->
+        <rect x="35" y="80" width="5" height="15" fill="${color}"/>
+        <rect x="50" y="80" width="5" height="15" fill="${color}"/>
+        <rect x="60" y="80" width="5" height="15" fill="${color}"/>
+      </svg>
+    `;
+    return L.icon({
+      iconUrl: `data:image/svg+xml;base64,${btoa(svg)}`,
+      iconSize: [40, 40],
+      iconAnchor: [20, 20],
+      popupAnchor: [0, -20],
+    });
   };
 
   return (
@@ -186,32 +231,23 @@ export const Map: React.FC<MapProps> = ({
       />
 
       {/* User Location Marker */}
-      <CircleMarker
-        center={[userLocation.latitude, userLocation.longitude]}
-        radius={8}
-        fill
-        color="#3b82f6"
-        fillOpacity={0.8}
-        weight={2}
+      <Marker
+        position={[userLocation.latitude, userLocation.longitude]}
+        icon={createLocationIcon()}
       >
         <Popup>Your Current Location</Popup>
-      </CircleMarker>
+      </Marker>
 
       {/* Cattle Reports */}
       {cattleReports.length>0&&cattleReports.map((report) => {
         const intensity = calculateIntensity(report.latitude, report.longitude);
-        const color = getIntensity(intensity);
-        const radius = 10 + intensity * 15;
+        const color = getIntensity(report.cowCount);
 
         return (
-          <CircleMarker
+          <Marker
             key={report.id}
-            center={[report.latitude, report.longitude]}
-            radius={radius}
-            fill
-            color={color}
-            fillOpacity={0.7}
-            weight={2}
+            position={[report.latitude, report.longitude]}
+            icon={createCowIcon(color)}
             eventHandlers={{
               click: () => onMarkerClick(report),
             }}
@@ -233,7 +269,7 @@ export const Map: React.FC<MapProps> = ({
                 </button>
               </div>
             </Popup>
-          </CircleMarker>
+          </Marker>
         );
       })}
     </MapContainer>

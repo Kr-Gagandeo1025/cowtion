@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function LandingPage() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -28,24 +29,26 @@ export default function LandingPage() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-2 text-2xl font-bold text-red-600">
-            <span>🐮Cowtion!</span>
+          <div className="flex items-center gap-2 text-2xl font-bold" style={{ color: '#ff5055' }}>
+            <Image src="/cowtion.png" alt='cowtion-log' height={30} width={30} className='w-10 h-auto'/>
+            <span>Cowtion!</span>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex gap-6 items-center">
-            <Link href="/about" className="text-gray-600 hover:text-red-600 font-semibold transition">
+            <Link href="/about" className="text-gray-600 hover:opacity-80 font-semibold transition" style={{ '--hover-color': '#ff5055' } as any}>
               About
             </Link>
-            <Link href="/contact" className="text-gray-600 hover:text-red-600 font-semibold transition">
+            <Link href="/contact" className="text-gray-600 hover:opacity-80 font-semibold transition" style={{ '--hover-color': '#ff5055' } as any}>
               Contact
             </Link>
-            <Link href="/terms-privacy" className="text-gray-600 hover:text-red-600 font-semibold transition">
+            <Link href="/terms-privacy" className="text-gray-600 hover:opacity-80 font-semibold transition" style={{ '--hover-color': '#ff5055' } as any}>
               Terms & Privacy
             </Link>
             <Link
               href="/home"
-              className="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+              className="px-6 py-2 text-white rounded-lg hover:opacity-90 transition"
+              style={{ backgroundColor: '#ff5055' }}
             >
               Get Started
             </Link>
@@ -69,28 +72,32 @@ export default function LandingPage() {
               <Link
                 href="/about"
                 onClick={closeMobileMenu}
-                className="block px-4 py-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg font-semibold transition"
+                className="block px-4 py-2 text-gray-600 hover:opacity-80 rounded-lg font-semibold transition"
+                style={{ '--hover-bg': '#ffe4e6' } as any}
               >
                 About
               </Link>
               <Link
                 href="/contact"
                 onClick={closeMobileMenu}
-                className="block px-4 py-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg font-semibold transition"
+                className="block px-4 py-2 text-gray-600 hover:opacity-80 rounded-lg font-semibold transition"
+                style={{ '--hover-bg': '#ffe4e6' } as any}
               >
                 Contact
               </Link>
               <Link
                 href="/terms-privacy"
                 onClick={closeMobileMenu}
-                className="block px-4 py-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg font-semibold transition"
+                className="block px-4 py-2 text-gray-600 hover:opacity-80 rounded-lg font-semibold transition"
+                style={{ '--hover-bg': '#ffe4e6' } as any}
               >
                 Terms & Privacy
               </Link>
               <Link
                 href="/home"
                 onClick={closeMobileMenu}
-                className="block px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 font-semibold transition text-center"
+                className="block px-4 py-2 text-white rounded-lg hover:opacity-90 font-semibold transition text-center"
+                style={{ backgroundColor: '#ff5055' }}
               >
                 Get Started
               </Link>
@@ -101,12 +108,10 @@ export default function LandingPage() {
 
       {/* Hero Section */}
       <section className="min-h-screen bg-linear-to-br from-red-50 via-white to-orange-50 pt-32 px-4 flex items-center justify-center">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="mb-8 flex justify-center text-9xl">
-            🐄
-          </div>
+        <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
+            <img src="/cowtion.png" alt='cowtion-log' height={30} width={30} className='w-[200px] h-auto'/>
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-            Drive Safe with <span className="text-red-600">Cowtion!</span>
+            Drive Safe with <span style={{ color: '#ff5055' }}>Cowtion!</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 mb-8">
             Real-time cattle alerts on the road. Stay cautious. Stay safe.
@@ -114,13 +119,14 @@ export default function LandingPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Link
               href="/home"
-              className="px-8 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition text-lg font-semibold"
+              className="px-8 py-3 text-white rounded-lg hover:opacity-90 transition text-lg font-semibold"
+              style={{ backgroundColor: '#ff5055' }}
             >
               Open Map
             </Link>
             <Link href={"#features"}>
-            <button className="px-8 py-3 border-2 border-red-600 text-red-600 rounded-lg hover:bg-red-50 transition text-lg font-semibold">
-              Learn More
+            <button className="px-8 py-3 border-2 rounded-lg hover:opacity-80 transition text-lg font-semibold" style={{ borderColor: '#ff5055', color: '#ff5055' }}>
+              Features
             </button>
             </Link>
           </div>
@@ -135,8 +141,8 @@ export default function LandingPage() {
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {/* Feature 1 */}
-            <div className="p-8 bg-linear-to-br from-red-50 to-orange-50 rounded-lg hover:shadow-lg transition">
-              <div className="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center mb-4">
+            <div className="p-8 rounded-lg hover:shadow-lg transition" style={{ background: 'linear-gradient(to bottom right, #ffe4e6, #fce5e0)' }}>
+              <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 text-white" style={{ backgroundColor: '#ff5055' }}>
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
@@ -148,8 +154,8 @@ export default function LandingPage() {
             </div>
 
             {/* Feature 2 */}
-            <div className="p-8 bg-linear-to-br from-red-50 to-orange-50 rounded-lg hover:shadow-lg transition">
-              <div className="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center mb-4">
+            <div className="p-8 rounded-lg hover:shadow-lg transition" style={{ background: 'linear-gradient(to bottom right, #ffe4e6, #fce5e0)' }}>
+              <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 text-white" style={{ backgroundColor: '#ff5055' }}>
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
@@ -161,8 +167,8 @@ export default function LandingPage() {
             </div>
 
             {/* Feature 3 */}
-            <div className="p-8 bg-linear-to-br from-red-50 to-orange-50 rounded-lg hover:shadow-lg transition">
-              <div className="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center mb-4">
+            <div className="p-8 rounded-lg hover:shadow-lg transition" style={{ background: 'linear-gradient(to bottom right, #ffe4e6, #fce5e0)' }}>
+              <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 text-white" style={{ backgroundColor: '#ff5055' }}>
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -174,8 +180,8 @@ export default function LandingPage() {
             </div>
 
             {/* Feature 4 */}
-            <div className="p-8 bg-linear-to-br from-red-50 to-orange-50 rounded-lg hover:shadow-lg transition">
-              <div className="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center mb-4">
+            <div className="p-8 rounded-lg hover:shadow-lg transition" style={{ background: 'linear-gradient(to bottom right, #ffe4e6, #fce5e0)' }}>
+              <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 text-white" style={{ backgroundColor: '#ff5055' }}>
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
@@ -187,8 +193,8 @@ export default function LandingPage() {
             </div>
 
             {/* Feature 5 */}
-            <div className="p-8 bg-linear-to-br from-red-50 to-orange-50 rounded-lg hover:shadow-lg transition">
-              <div className="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center mb-4">
+            <div className="p-8 rounded-lg hover:shadow-lg transition" style={{ background: 'linear-gradient(to bottom right, #ffe4e6, #fce5e0)' }}>
+              <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 text-white" style={{ backgroundColor: '#ff5055' }}>
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -201,8 +207,8 @@ export default function LandingPage() {
             </div>
 
             {/* Feature 6 */}
-            <div className="p-8 bg-linear-to-br from-red-50 to-orange-50 rounded-lg hover:shadow-lg transition">
-              <div className="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center mb-4">
+            <div className="p-8 rounded-lg hover:shadow-lg transition" style={{ background: 'linear-gradient(to bottom right, #ffe4e6, #fce5e0)' }}>
+              <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 text-white" style={{ backgroundColor: '#ff5055' }}>
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
@@ -230,7 +236,7 @@ export default function LandingPage() {
               { num: '4', title: 'AI Analysis', desc: 'Gemini AI analyzes image & road' },
             ].map((step) => (
               <div key={step.num} className="text-center">
-                <div className="w-16 h-16 bg-red-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+                <div className="w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold" style={{ backgroundColor: '#ff5055' }}>
                   {step.num}
                 </div>
                 <h3 className="text-xl font-bold mb-2 text-gray-900">{step.title}</h3>
@@ -242,17 +248,18 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-linear-to-r from-red-600 to-red-700">
+      <section className="py-20 px-4" style={{ background: 'linear-gradient(to right, #ff5055, #ff3040)' }}>
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-6 text-white">
             Ready to Drive Safer?
           </h2>
-          <p className="text-xl mb-8 text-red-100">
+          <p className="text-xl mb-8" style={{ color: 'rgba(255,255,255,0.8)' }}>
             Start reporting and viewing cattle alerts in real-time. Help keep roads safe for everyone.
           </p>
           <Link
             href="/home"
-            className="inline-block px-8 py-3 bg-white text-red-600 rounded-lg hover:bg-gray-100 transition text-lg font-semibold"
+            className="inline-block px-8 py-3 bg-white rounded-lg hover:opacity-90 transition text-lg font-semibold"
+            style={{ color: '#ff5055' }}
           >
             Open Cowtion Now
           </Link>

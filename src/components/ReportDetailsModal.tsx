@@ -101,7 +101,7 @@ export const ReportDetailsModal: React.FC<ReportDetailsModalProps> = ({
         <div className="grid grid-cols-2 gap-4 mb-6">
           <div>
             <p className="text-gray-600 font-bold text-sm">Cattle Count</p>
-            <p className="text-2xl font-bold text-red-600">{report.cowCount}</p>
+            <p className="text-2xl font-bold" style={{ color: '#ff5055' }}>{report.cowCount}</p>
           </div>
           <div>
             <p className="text-gray-600 text-sm font-bold">Road Condition</p>

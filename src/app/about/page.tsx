@@ -6,20 +6,20 @@ export default function AboutPage() {
       {/* Navigation */}
       <nav className="bg-white shadow-md sticky top-0 z-40">
         <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="flex items-center gap-2 font-bold text-xl text-red-600">
-            🐄 Cowtion
+          <Link href="/" className="flex items-center gap-2 font-bold text-xl" style={{ color: '#ff5055' }}>
+            � Cowtion!
           </Link>
           <div className="flex gap-4">
-            <Link href="/" className="hover:text-red-600 transition">
+            <Link href="/" className="hover:opacity-80 transition" style={{ color: '#ff5055' }}>
               Home
             </Link>
-            <Link href="/about" className="text-red-600 font-semibold">
+            <Link href="/about" className="font-semibold" style={{ color: '#ff5055' }}>
               About
             </Link>
-            <Link href="/contact" className="hover:text-red-600 transition">
+            <Link href="/contact" className="hover:opacity-80 transition" style={{ color: '#ff5055' }}>
               Contact
             </Link>
-            <Link href="/terms-privacy" className="hover:text-red-600 transition">
+            <Link href="/terms-privacy" className="hover:opacity-80 transition" style={{ color: '#ff5055' }}>
               Terms & Privacy
             </Link>
           </div>
@@ -102,7 +102,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Benefit 1 */}
             <div className="bg-linear-to-br from-red-50 to-orange-50 rounded-lg p-8 border-2 border-red-200">
-              <h3 className="text-2xl font-bold text-red-600 mb-4">🚗 Reduces Road Accidents</h3>
+              <h3 className="text-2xl font-bold mb-4" style={{ color: '#ff5055' }}>🚗 Reduces Road Accidents</h3>
               <p className="text-gray-700 leading-relaxed">
                 According to NHAI data, stray cattle cause thousands of road accidents annually in India. 
                 Cowtion provides real-time warnings, giving drivers time to react and avoid collisions.
@@ -216,7 +216,7 @@ export default function AboutPage() {
 
         {/* Our Mission */}
         <section className="mb-16">
-          <div className="bg-linear-to-r from-red-600 to-orange-600 rounded-lg shadow-lg p-12 text-white text-center">
+          <div className="rounded-lg shadow-lg p-12 text-white text-center" style={{ background: 'linear-gradient(to right, #ff5055, #ff9900)' }}>
             <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
             <p className="text-lg mb-6 leading-relaxed">
               To save lives and reduce accidents on Indian roads by creating a real-time, 
@@ -235,7 +235,8 @@ export default function AboutPage() {
           <div className="flex gap-4 justify-center">
             <Link
               href="/home"
-              className="px-8 py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition shadow-lg"
+              className="px-8 py-3 text-white font-bold rounded-lg hover:opacity-90 transition shadow-lg"
+              style={{ backgroundColor: '#ff5055' }}
             >
               View Live Map
             </Link>

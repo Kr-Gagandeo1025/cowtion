@@ -7,6 +7,7 @@ import { ReportDetailsModal } from '@/components/ReportDetailsModal';
 import { getCattleReportsNearby } from '@/lib/db';
 import { useCowStore } from '@/store/cowStore';
 import { CattleReport } from '@/types';
+import Image from 'next/image';
 
 const Map = dynamic(() => import('@/components/Map').then(m => ({ default: m.Map })), {
   ssr: false,
@@ -104,14 +105,16 @@ export default function HomePage() {
   return (
     <div className="w-screen h-screen flex flex-col bg-white">
       {/* Header */}
-      <div className="bg-red-600 text-white p-4 shadow-lg flex items-center justify-between z-10">
+      <div className="bg-white relative text-black p-4 shadow-lg flex items-center justify-between z-10 overflow-y-hidden">
         <div className="flex items-center gap-2">
-          <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" />
-          </svg>
-          <h1 className="text-2xl font-bold">Cowtion</h1>
+            <img src="/cowtion.png" alt='cowtion-log' height={30} width={30} className='w-[40px] h-auto'/>
+          <h1 className="text-2xl font-bold">Cowtion!</h1>
         </div>
-        <p className="text-sm">People and Cattle Safety System</p>
+        <Image src="/cowPrint.png" alt='cow-print' height={20} width={20} className='w-10 h-auto absolute right-50'/>
+        <Image src="/cowPrint.png" alt='cow-print' height={20} width={20} className='w-10 h-auto absolute right-40 -bottom-6'/>
+        <Image src="/cowPrint.png" alt='cow-print' height={20} width={20} className='w-10 h-auto absolute right-35 bottom-10'/>
+        <Image src="/cowPrint.png" alt='cow-print' height={20} width={20} className='w-10 h-auto absolute right-20 -bottom-2.5'/>
+        <Image src="/cowPrint.png" alt='cow-print' height={20} width={20} className='w-10 h-auto absolute right-10 bottom-8'/>
       </div>
 
       {/* Map Container */}
@@ -126,7 +129,8 @@ export default function HomePage() {
         <button
           onClick={() => setIsUploadOpen(true)}
           disabled={!userLocation}
-          className="absolute bottom-16 right-8 w-16 h-16 bg-red-600 hover:bg-red-700 text-white rounded-full shadow-lg flex items-center justify-center text-3xl transition disabled:opacity-50 z-50"
+          className="absolute bottom-16 right-8 w-16 h-16 hover:opacity-90 text-white rounded-full shadow-lg flex items-center justify-center text-3xl transition disabled:opacity-50 z-50"
+          style={{ backgroundColor: '#ff5055' }}
           title="Report cattle"
         >
           +
@@ -135,9 +139,9 @@ export default function HomePage() {
         {/* Report Count Badge */}
         <div className="absolute top-4 right-4 bg-white rounded-lg shadow-lg p-3 z-40 min-w-[200px]">
           <p className="text-gray-700 text-xl text-center">
-            <span className="font-bold text-red-600">{cattleReports.length}</span> alerts
+            <span className="font-bold" style={{ color: '#ff5055' }}>{cattleReports.length}</span> alerts
           </p>
-          <p className="text-xs text-gray-500 text-center">in your area</p>
+          <p className="text-xs text-gray-500 text-center">within 5KM of your location</p>
         </div>
       </div>
 
