@@ -13,7 +13,7 @@ import { deleteExpiredReports, getExpiredReportsCount } from '@/lib/cleanup';
 export async function POST(request: NextRequest) {
   try {
     // Optional: Validate request origin in production
-    const authHeader = request.headers.get('authorization');
+    const authHeader = request.headers.get('Authorization');
     const cronSecret = process.env.CRON_SECRET || 'dev-secret';
     
     // For production, you should verify the request is from your cron service
