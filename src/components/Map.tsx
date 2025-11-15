@@ -254,11 +254,6 @@ export const Map: React.FC<MapProps> = ({
           >
             <Popup>
               <div className="max-w-xs">
-                <img
-                  src={report.imageUrl}
-                  alt="Cattle"
-                  className="w-24 h-24 object-cover rounded mb-2"
-                />
                 <p className="font-semibold">{report.cowCount} cattle</p>
                 <p className="text-sm">{report.roadCondition}</p>
                 <button

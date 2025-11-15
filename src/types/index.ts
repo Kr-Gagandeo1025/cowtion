@@ -11,6 +11,7 @@ export interface CattleReport {
   upvotes: number;
   downvotes: number;
   userVote?: 'up' | 'down' | null;
+  imageLoaded?: boolean; // Track if image has been loaded
 }
 
 export interface UserLocation {

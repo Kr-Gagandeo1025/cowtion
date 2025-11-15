@@ -114,11 +114,41 @@ export async function getCattleReport(reportId: string): Promise<CattleReport | 
       return {
         id: docSnap.id,
         ...docSnap.data(),
+        imageLoaded: true, // Mark as fully loaded with image
       } as CattleReport;
     }
     return null;
   } catch (error) {
     console.error('Error fetching cattle report:', error);
+    return null;
+  }
+}
+
+// Get report without image initially (lazy loading)
+export async function getCattleReportLazy(reportId: string): Promise<Omit<CattleReport, 'imageUrl'> & { imageUrl?: string } | null> {
+  try {
+    const docRef = doc(db, 'cattle-reports', reportId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      return {
+        id: docSnap.id,
+        latitude: data.latitude,
+        longitude: data.longitude,
+        cowCount: data.cowCount,
+        roadCondition: data.roadCondition,
+        description: data.description,
+        timestamp: data.timestamp,
+        uploadedBy: data.uploadedBy,
+        upvotes: data.upvotes || 0,
+        downvotes: data.downvotes || 0,
+        imageLoaded: false, // Mark as not having image loaded yet
+      } as any;
+    }
+    return null;
+  } catch (error) {
+    console.error('Error fetching cattle report (lazy):', error);
     return null;
   }
 }
@@ -148,7 +178,7 @@ export async function downvoteCattleReport(reportId: string): Promise<void> {
     const updatedDoc = await getDoc(docRef);
     if (updatedDoc.exists()) {
       const downvotes = updatedDoc.data().downvotes || 0;
-      if (downvotes >= 100) {
+      if (downvotes >= 10) {
         console.log(`Report ${reportId} reached 100+ downvotes, auto-deleting...`);
         await deleteReport(reportId);
       }

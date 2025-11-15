@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CattleReport } from '@/types';
-import { upvoteCattleReport, downvoteCattleReport } from '@/lib/db';
+import { upvoteCattleReport, downvoteCattleReport, getCattleReport } from '@/lib/db';
 
 interface ReportDetailsModalProps {
   report: CattleReport | null;
@@ -22,8 +22,30 @@ export const ReportDetailsModal: React.FC<ReportDetailsModalProps> = ({
   const [isVoting, setIsVoting] = useState(false);
   const [downvoteCount, setDownvoteCount] = useState(report?.downvotes || 0);
   const [upvoteCount, setUpvoteCount] = useState(report?.upvotes || 0);
+  const [fullReport, setFullReport] = useState<CattleReport | null>(null);
+  const [isLoadingImage, setIsLoadingImage] = useState(false);
+
+  // Fetch full report with image when modal opens
+  useEffect(() => {
+    if (isOpen && report && !report.imageLoaded) {
+      setIsLoadingImage(true);
+      getCattleReport(report.id).then((fullData) => {
+        if (fullData) {
+          setFullReport(fullData);
+        }
+        setIsLoadingImage(false);
+      }).catch((error) => {
+        console.error('Error loading full report:', error);
+        setIsLoadingImage(false);
+      });
+    } else if (isOpen && report) {
+      setFullReport(report);
+    }
+  }, [isOpen, report]);
 
   if (!isOpen || !report) return null;
+
+  const displayReport = fullReport || report;
 
   const handleVote = async (voteType: 'up' | 'down') => {
     setIsVoting(true);
@@ -90,11 +112,24 @@ export const ReportDetailsModal: React.FC<ReportDetailsModalProps> = ({
 
         {/* Image */}
         <div className="mb-4">
-          <img
-            src={report.imageUrl}
-            alt="Cattle alert"
-            className="w-full h-96 object-cover rounded-lg"
-          />
+          {isLoadingImage ? (
+            <div className="w-full h-96 bg-gray-200 rounded-lg flex items-center justify-center">
+              <div className="text-gray-600 text-center">
+                <p className="text-lg mb-2">📸</p>
+                <p>Loading image...</p>
+              </div>
+            </div>
+          ) : displayReport.imageUrl ? (
+            <img
+              src={displayReport.imageUrl}
+              alt="Cattle alert"
+              className="w-full h-96 object-cover rounded-lg"
+            />
+          ) : (
+            <div className="w-full h-96 bg-gray-200 rounded-lg flex items-center justify-center">
+              <p className="text-gray-600">No image available</p>
+            </div>
+          )}
         </div>
 
         {/* Details Grid */}
