@@ -12,6 +12,6 @@ jobs:
       - name: Trigger cleanup job
         run: |
           curl -X POST \
-            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            -H "Authorization: Bearer ${{ secrets.CORN_SECRET_COWTION }}" \
             -H "Content-Type: application/json" \
             https://cowtion.vercel.app/api/cleanup
