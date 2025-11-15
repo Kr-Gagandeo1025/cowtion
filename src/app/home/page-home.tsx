@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { UploadModal } from '@/components/UploadModal';
 import { ReportDetailsModal } from '@/components/ReportDetailsModal';
-import { getCattleReportsNearby } from '@/lib/db';
+import { getCattleReportsNearbyLazy } from '@/lib/db';
 import { useCowStore } from '@/store/cowStore';
 import { CattleReport } from '@/types';
 import Image from 'next/image';
@@ -67,7 +67,7 @@ export default function HomePage() {
       if (userLocation) {
         setIsLoading(true);
         try {
-          const reports = await getCattleReportsNearby(
+          const reports = await getCattleReportsNearbyLazy(
             userLocation.latitude,
             userLocation.longitude,
             10 // 10km radius

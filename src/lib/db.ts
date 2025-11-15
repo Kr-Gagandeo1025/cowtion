@@ -153,6 +153,51 @@ export async function getCattleReportLazy(reportId: string): Promise<Omit<Cattle
   }
 }
 
+// Get nearby cattle reports with lazy loading (without images) within radius
+export async function getCattleReportsNearbyLazy(
+  latitude: number,
+  longitude: number,
+  radiusInKm: number = 5
+): Promise<CattleReport[]> {
+  try {
+    const q = query(collection(db, 'cattle-reports'));
+    const querySnapshot = await getDocs(q);
+
+    const reports: CattleReport[] = [];
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      const distance = calculateDistance(
+        latitude,
+        longitude,
+        data.latitude,
+        data.longitude
+      );
+
+      if (distance <= radiusInKm) {
+        reports.push({
+          id: doc.id,
+          latitude: data.latitude,
+          longitude: data.longitude,
+          cowCount: data.cowCount,
+          roadCondition: data.roadCondition,
+          description: data.description,
+          timestamp: data.timestamp,
+          uploadedBy: data.uploadedBy,
+          upvotes: data.upvotes || 0,
+          downvotes: data.downvotes || 0,
+          imageUrl: '', // Empty initially, loaded on demand
+          imageLoaded: false,
+        } as CattleReport);
+      }
+    });
+
+    return reports.sort((a, b) => b.timestamp - a.timestamp);
+  } catch (error) {
+    console.error('Error fetching nearby cattle reports (lazy):', error);
+    return [];
+  }
+}
+
 export async function upvoteCattleReport(reportId: string): Promise<void> {
   try {
     const docRef = doc(db, 'cattle-reports', reportId);
