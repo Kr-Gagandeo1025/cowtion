@@ -253,15 +253,34 @@ export const Map: React.FC<MapProps> = ({
             }}
           >
             <Popup>
-              <div className="max-w-xs">
-                <p className="font-semibold">{report.cowCount} cattle</p>
-                <p className="text-sm">{report.roadCondition}</p>
-                <button
-                  onClick={() => onMarkerClick(report)}
-                  className="mt-2 px-2 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600"
-                >
-                  View Details
-                </button>
+              <div className="max-w-xs bg-white rounded-lg p-3 shadow-md">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-[#ffedf0] flex items-center justify-center text-sm font-bold text-[#ff5055]">🐄</div>
+                    <div>
+                      <p className="font-semibold text-gray-800">{report.cowCount} cattle</p>
+                      <p className="text-xs text-gray-500">{report.roadCondition}</p>
+                    </div>
+                  </div>
+                  <div className="text-xs text-gray-400">{new Date(report.timestamp).toLocaleTimeString()}</div>
+                </div>
+
+                <div className="mt-3 flex gap-2">
+                  <button
+                    onClick={() => onMarkerClick(report)}
+                    className="flex-1 px-3 py-2 bg-[#ff5055] text-white text-sm rounded-lg hover:opacity-95"
+                  >
+                    View Details
+                  </button>
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${report.latitude},${report.longitude}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-3 py-2 bg-gray-100 text-gray-800 text-sm rounded-lg hover:bg-gray-200"
+                  >
+                    Navigate
+                  </a>
+                </div>
               </div>
             </Popup>
           </Marker>
