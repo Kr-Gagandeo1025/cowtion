@@ -131,7 +131,7 @@ export default function HomePage() {
           disabled={!userLocation}
           className="absolute bottom-16 right-8 w-16 h-16 hover:opacity-90 text-white rounded-full shadow-lg flex items-center justify-center text-3xl transition disabled:opacity-50 z-50"
           style={{ backgroundColor: '#ff5055' }}
-          title="Report cattle"
+          title="Report Cattle Activity"
         >
           +
         </button>
