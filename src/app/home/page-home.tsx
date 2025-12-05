@@ -139,7 +139,7 @@ export default function HomePage() {
         {/* Report Count Badge */}
         <div className="absolute top-4 right-4 bg-white rounded-lg shadow-lg p-3 z-40 min-w-[200px]">
           <p className="text-gray-700 text-xl text-center">
-            <span className="font-bold" style={{ color: '#ff5055' }}>{cattleReports.length}</span> alerts
+            <span className="font-bold" style={{ color: '#ff5055' }}>{cattleReports.length}</span> ALERTS
           </p>
           <p className="text-xs text-gray-500 text-center">within 5KM of your location</p>
         </div>
