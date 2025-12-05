@@ -137,13 +137,13 @@ export default function AboutPage() {
             </div>
 
             {/* Benefit 5 */}
-            {/* <div className="bg-linear-to-br from-yellow-50 to-amber-50 rounded-lg p-8 border-2 border-yellow-200">
+            <div className="bg-linear-to-br from-yellow-50 to-amber-50 rounded-lg p-8 border-2 border-yellow-200">
               <h3 className="text-2xl font-bold text-amber-600 mb-4">🌍 Accessible to All</h3>
               <p className="text-gray-700 leading-relaxed">
                 Works on basic smartphones with 3G/4G connectivity. No registration required. 
                 Designed for users across India, rural and urban.
               </p>
-            </div> */}
+            </div>
 
             {/* Benefit 6 */}
             <div className="bg-linear-to-br from-indigo-50 to-blue-50 rounded-lg p-8 border-2 border-indigo-200">
