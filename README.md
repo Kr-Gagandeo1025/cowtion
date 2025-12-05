@@ -1,4 +1,4 @@
-# Cowtion - Road Safety Alert System
+# Cowtion - The Road Safety Alert System
 
 A modern web application that helps drivers and road users stay cautious of cattle on roads. Real-time alerts powered by AI analysis and community reports.
 
