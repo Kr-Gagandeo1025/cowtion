@@ -136,9 +136,9 @@ export const UploadModal: React.FC<UploadModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 p-6">
-        <h2 className="text-2xl font-bold mb-4 text-black">Report Cattle Alert</h2>
+    <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-4 p-6">
+        <h2 className="text-2xl font-extrabold mb-4 text-gray-900">Report Cattle Alert</h2>
 
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4">
@@ -147,11 +147,11 @@ export const UploadModal: React.FC<UploadModalProps> = ({
         )}
 
         {preview && (
-          <div className="mb-4">
+          <div className="mb-4 rounded-xl overflow-hidden shadow-md">
             <img
               src={preview}
               alt="Preview"
-              className="w-full h-64 object-cover rounded-lg"
+              className="w-full h-64 object-cover"
             />
           </div>
         )}
@@ -159,7 +159,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
         {!preview && (
           <div
             onClick={() => fileInputRef.current?.click()}
-            className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-blue-500 transition mb-4"
+            className="border-2 border-dashed border-gray-200 rounded-lg p-8 text-center cursor-pointer hover:border-[#ff5055] transition mb-4 bg-linear-to-b from-white to-gray-50"
           >
             <svg
               className="mx-auto h-12 w-12 text-gray-400"
@@ -193,7 +193,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
           <div className="mb-4">
             <div className="w-full bg-gray-200 rounded-full h-2">
               <div
-                className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                className="bg-[#ff5055] h-2 rounded-full transition-all duration-300"
                 style={{ width: `${uploadProgress}%` }}
               ></div>
             </div>
@@ -213,14 +213,14 @@ export const UploadModal: React.FC<UploadModalProps> = ({
               onClose();
             }}
             disabled={isUploading}
-            className="flex-1 px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 disabled:opacity-50"
+            className="flex-1 px-4 py-2 bg-gray-50 text-gray-800 rounded-lg hover:bg-gray-100 disabled:opacity-50 border"
           >
             Cancel
           </button>
           <button
             onClick={handleUpload}
             disabled={!selectedFile || isUploading}
-            className="flex-1 px-4 py-2 bg-[#ff5055] text-white rounded-lg hover:opacity-90 disabled:opacity-50"
+            className="flex-1 px-4 py-2 bg-[#ff5055] text-white rounded-lg hover:opacity-95 disabled:opacity-50 shadow-md"
           >
             {isUploading ? 'Uploading...' : 'Upload Alert'}
           </button>
