@@ -98,122 +98,101 @@ export const ReportDetailsModal: React.FC<ReportDetailsModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto">
-      <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 my-8 p-6 h-[90%] overflow-y-scroll">
-        <div className="flex justify-between items-start mb-4">
-          <h2 className="text-2xl font-bold text-black">Cattle Alert Details</h2>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 text-2xl"
-          >
-            ×
-          </button>
+    <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 my-8 p-0 overflow-hidden transform transition-all duration-200">
+        {/* Header */}
+  <div className="flex items-center justify-between px-6 py-4 bg-linear-to-r from-pink-500 to-orange-400 text-white">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-xl font-bold">🐄</div>
+            <div>
+              <h3 className="text-lg font-semibold">Cattle Alert</h3>
+              <p className="text-sm opacity-90">{displayReport.cowCount} cattle · {displayReport.roadCondition}</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="text-sm bg-white/20 px-3 py-1 rounded-full">{formatDate(displayReport.timestamp)}</div>
+            <button onClick={onClose} aria-label="Close" className="text-white hover:opacity-90 text-2xl">×</button>
+          </div>
         </div>
 
-        {/* Image */}
-        <div className="mb-4">
-          {isLoadingImage ? (
-            <div className="w-full h-96 bg-gray-200 rounded-lg flex items-center justify-center">
-              <div className="text-gray-600 text-center">
-                <p className="text-lg mb-2">📸</p>
-                <p>Loading image...</p>
+        <div className="p-6 space-y-6">
+          {/* Image area */}
+          <div className="relative w-full rounded-xl overflow-hidden shadow-md">
+            {isLoadingImage ? (
+              <div className="w-full h-80 bg-gray-100 flex items-center justify-center">
+                <div className="text-gray-500 text-center">
+                  <p className="text-2xl mb-2">📸</p>
+                  <p>Loading image...</p>
+                </div>
               </div>
-            </div>
-          ) : displayReport.imageUrl ? (
-            <img
-              src={displayReport.imageUrl}
-              alt="Cattle alert"
-              className="w-full h-96 object-cover rounded-lg"
-            />
-          ) : (
-            <div className="w-full h-96 bg-gray-200 rounded-lg flex items-center justify-center">
-              <p className="text-gray-600">No image available</p>
-            </div>
-          )}
-        </div>
+            ) : displayReport.imageUrl ? (
+              <img src={displayReport.imageUrl} alt="Cattle alert" className="w-full h-80 object-cover" />
+            ) : (
+              <div className="w-full h-80 bg-linear-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                <div className="text-gray-500 text-center">
+                  <p className="text-3xl mb-2">🐄</p>
+                  <p className="text-sm">No image available</p>
+                </div>
+              </div>
+            )}
 
-        {/* Details Grid */}
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <div>
-            <p className="text-gray-600 font-bold text-sm">Cattle Count</p>
-            <p className="text-2xl font-bold" style={{ color: '#ff5055' }}>{report.cowCount}</p>
-          </div>
-          <div>
-            <p className="text-gray-600 text-sm font-bold">Road Condition</p>
-            <div className="mt-1">
-              <span className={`px-3 py-1 rounded-full text-sm font-medium ${getConditionColor(report.roadCondition)}`}>
-                {report.roadCondition}
-              </span>
+            {/* Badges on image */}
+            <div className="absolute top-4 left-4">
+              <span className="bg-white/90 text-sm text-black px-3 py-1 rounded-full font-semibold">{displayReport.cowCount} cows</span>
+            </div>
+            <div className="absolute top-4 right-4">
+              <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getConditionColor(displayReport.roadCondition)}`}>{displayReport.roadCondition}</span>
             </div>
           </div>
-          <div>
-            <p className="text-gray-600 font-bold text-sm">Reported</p>
-            <p className="text-sm text-black">{formatDate(report.timestamp)}</p>
-          </div>
-          <div>
-            <p className="text-gray-600 font-bold text-sm">Location</p>
-            <p className="text-sm text-black">
-              {report.latitude.toFixed(4)}, {report.longitude.toFixed(4)}
-            </p>
-          </div>
-        </div>
 
-        {/* Description */}
-        <div className="mb-6">
-          <p className="text-gray-600 text-sm">Description</p>
-          <p className="text-gray-800 mt-2">{report.description}</p>
-        </div>
+          {/* Meta grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="bg-white p-4 rounded-xl shadow-sm">
+              <p className="text-xs text-gray-500">Location</p>
+              <p className="text-sm font-medium text-gray-800">{displayReport.latitude.toFixed(5)}, {displayReport.longitude.toFixed(5)}</p>
+            </div>
+            <div className="bg-white p-4 rounded-xl shadow-sm">
+              <p className="text-xs text-gray-500">Reported By</p>
+              <p className="text-sm font-medium text-gray-800">{displayReport.uploadedBy || 'Anonymous'}</p>
+              <p className="text-xs text-gray-500 mt-2">ID: {displayReport.id}</p>
+            </div>
+          </div>
 
-        {/* Upvote/Downvote */}
-        <div className="mb-6">
-          <p className="text-gray-600 text-sm mb-3">Is this report helpful?</p>
-          <div className="flex gap-4 items-center">
-            <button
-              onClick={() => handleVote('up')}
-              disabled={isVoting}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition ${
-                userVote === 'up'
-                  ? 'bg-green-500 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              } disabled:opacity-50`}
-            >
-              <svg
-                className="w-5 h-5"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path d="M2 10.5a1.5 1.5 0 113 0v-6a1.5 1.5 0 01-3 0v6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.519-7.594A2 2 0 0015.378 8H4.721a2 2 0 00-1.994 2.263l.007.086a2 2 0 001.994 1.984h9.303a1 1 0 00.992-1.16l-.213-1.28a4 4 0 00-3.939-3.464H9.172a2 2 0 00-1.441.563L6.05 9.5H6z" />
-              </svg>
-              Helpful ({upvoteCount===0? report?.upvotes : upvoteCount})
-            </button>
-            <button
-              onClick={() => handleVote('down')}
-              disabled={isVoting}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition ${
-                userVote === 'down'
-                  ? 'bg-red-500 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              } disabled:opacity-50`}
-            >
-              <svg
-                className="w-5 h-5"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path d="M18 9.5a1.5 1.5 0 11-3 0v6a1.5 1.5 0 013 0v-6zM14 9.667v-5.43a2 2 0 00-1.106-1.79l-.05-.025A4 4 0 0011.057 2H5.641a2 2 0 00-1.962 1.608l-1.519 7.594A2 2 0 004.622 12h10.657a2 2 0 001.992-2.263l-.006-.086a2 2 0 00-1.994-1.984H5.339a1 1 0 00-.992 1.16l.213 1.28a4 4 0 003.939 3.464h.3a2 2 0 001.441-.563l1.555-1.587h1.158z" />
-              </svg>
-              Not Helpful ({downvoteCount===0? report?.downvotes : downvoteCount})
-            </button>
+          {/* Description */}
+          <div className="bg-white p-4 rounded-xl shadow-sm">
+            <p className="text-xs text-gray-500">Description</p>
+            <p className="mt-2 text-gray-800">{displayReport.description}</p>
+          </div>
+
+          {/* Actions */}
+          <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex-1 flex gap-3">
+              <button
+                onClick={() => handleVote('up')}
+                disabled={isVoting}
+                className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg transition shadow-sm text-sm font-medium ${
+                  userVote === 'up' ? 'bg-green-500 text-white' : 'bg-white text-gray-800 hover:bg-gray-50'
+                } disabled:opacity-50`}>
+                👍 Helpful
+                <span className="ml-2 text-sm text-gray-600">({upvoteCount===0? displayReport.upvotes : upvoteCount})</span>
+              </button>
+              <button
+                onClick={() => handleVote('down')}
+                disabled={isVoting}
+                className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg transition shadow-sm text-sm font-medium ${
+                  userVote === 'down' ? 'bg-red-500 text-white' : 'bg-white text-gray-800 hover:bg-gray-50'
+                } disabled:opacity-50`}>
+                👎 Not Helpful
+                <span className="ml-2 text-sm text-gray-600">({downvoteCount===0? displayReport.downvotes : downvoteCount})</span>
+              </button>
+            </div>
+
+            <div className="w-full sm:w-auto flex gap-2">
+              <button onClick={() => { navigator.clipboard?.writeText(window.location.href); }} className="px-4 py-3 bg-blue-600 text-white rounded-lg shadow-sm text-sm">Share</button>
+              <button onClick={onClose} className="px-4 py-3 bg-gray-100 text-gray-800 rounded-lg shadow-sm text-sm">Close</button>
+            </div>
           </div>
         </div>
-
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-        >
-          Close
-        </button>
       </div>
     </div>
   );
